@@ -1,0 +1,11 @@
+---
+- hosts: all
+  remote_user: pi
+  sudo: True
+  tasks:
+  - name: Ensure DNS is setup (copy resolv.conf)
+    copy: src=/etc/ansible/resolv.conf dest=/etc/resolv.conf 
+  - name: Ensure NTP is installed (apt-get).
+    apt: name=ntp state=installed
+  - name: Ensure NTP is running.
+    service: name=ntpd state=started enabled=yes
